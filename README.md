@@ -1,70 +1,108 @@
 
-# Proyecto: Detección automática de madurez y calidad de frutas
+FruitVision — Clasificación de Frutas Frescas y Podridas con Técnicas de Visión por Computador
 
-Este proyecto implementa un sistema de visión por computador para clasificar frutas según su estado de madurez
-y presencia de defectos superficiales, usando modelos entrenados desde cero y modelos preentrenados
-(con Transfer Learning).
+Autor:
 
-## Estructura del proyecto
+Jesús Santiago Amado Montaña
 
-- `train_cnn_scratch.py`: Entrenamiento de una CNN desde cero para clasificar frutas (madura vs inmadura).
-- `train_transfer_mobilenet.py`: Entrenamiento de un modelo basado en MobileNetV2 para clasificar frutas según calidad.
-- `infer_image.py`: Script de inferencia para clasificar una imagen individual usando un modelo entrenado.
-- `preprocessing_demo.py`: Ejemplos de preprocesamiento con OpenCV (HSV, segmentación por color, bordes, morfología).
-- `requirements.txt`: Librerías principales utilizadas.
+Objetivo del proyecto
 
-## Organización de datos esperada
+Desarrollar un sistema capaz de clasificar frutas frescas y podridas usando modelos de Visión por Computador, aplicando:
 
-Los scripts de entrenamiento asumen una estructura de carpetas como:
+Entrenamiento de un modelo desde cero
 
-```
-data/
-    train/
-        ripe/
-        unripe/
-    val/
-        ripe/
-        unripe/
-    quality_train/
-        good/
-        defective/
-    quality_val/
-        good/
-        defective/
-```
+Transfer learning con MobileNetV2
 
-Cada subcarpeta contiene imágenes JPG/PNG de la clase correspondiente.
+Preprocesamiento y limpieza de imágenes
 
-## Cómo usar
+Segmentación y análisis de color
 
-1. Crear y activar un entorno virtual de Python.
-2. Instalar dependencias:
+Inferencia sobre imágenes nuevas
 
-```bash
-pip install -r requirements.txt
-```
+Dataset:
 
-3. Entrenar la CNN desde cero:
+Se utiliza el dataset público:
 
-```bash
-python train_cnn_scratch.py
-```
+“Fruits Fresh and Rotten for Classification”
+https://www.kaggle.com/datasets/sriramr/fruits-fresh-and-rotten-for-classification
 
-4. Entrenar el modelo con MobileNetV2:
+Incluye 6 clases:
 
-```bash
-python train_transfer_mobilenet.py
-```
+freshapples
 
-5. Ejecutar inferencia sobre una imagen:
+freshbanana
 
-```bash
-python infer_image.py --image_path ruta/a/imagen.jpg --model_type mobilenet
-```
+freshoranges
 
-## Notas
+rottenapples
 
-- El código está pensado como base académica: puede ajustarse el número de épocas, tamaño del batch
-  y rutas de datos según el entorno del estudiante.
-- Para la sustentación, se recomienda mostrar ejemplos de imágenes de entrada, salidas de los modelos,
-  matrices de confusión y curvas de entrenamiento.
+rottenbanana
+
+rottenoranges
+
+Modelos implementados
+1. Modelo CNN desde cero
+
+Archivo: train_cnn_scratch.py
+
+Incluye:
+
+Capas Conv2D
+
+MaxPooling
+
+Flatten
+
+Dense
+
+Regularización y augmentación
+
+2. Transfer Learning con MobileNetV2
+
+Archivo: train_transfer_mobilenet.py
+
+Incluye:
+
+Carga de MobileNetV2 sin top
+
+Congelamiento de capas
+
+Fine-tuning
+
+Aumento de datos
+
+Resultado típico:
+
+Accuracy entre 93% y 96%
+
+Preprocesamiento:
+
+Archivo: preprocessing_demo.py
+
+Técnicas incluidas:
+
+Redimensionamiento
+
+Normalización
+
+Eliminación de ruido
+
+Aumento de datos
+
+Comparación “antes/después”
+
+Inferencia
+
+Archivo: infer_image.py
+
+Permite:
+
+Cargar el modelo entrenado
+
+Darle la ruta de una imagen y obtener:
+
+clase predicha
+
+probabilidad
+
+visualización opcional
